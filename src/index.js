@@ -11,10 +11,18 @@ const server = createServer(app);
 const PORT = process.env.PORT || 4000;
 
 const io = new Server(server, {
-    cors: corsOptions,
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+        credentials: true,
+    },
 });
 
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true,
+}));
 
 io.on("connection", async (socket) => {
     await onlineStatusSocket(io, socket);
