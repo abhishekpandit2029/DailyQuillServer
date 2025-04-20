@@ -2,8 +2,9 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
-import { onlineStatusSocket } from "./sockets/onlineStatusSocket";
-import { typingIndicatorSocket } from "./sockets/typingIndicatorSocket";
+import { onlineStatusSocket } from "./sockets/onlineStatusSocket.js";
+import { typingIndicatorSocket } from "./sockets/typingIndicatorSocket.js";
+
 
 const app = express();
 const server = createServer(app);
