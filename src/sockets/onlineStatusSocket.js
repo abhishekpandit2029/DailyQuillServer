@@ -1,15 +1,8 @@
-import { Server, Socket } from "socket.io";
+const onlineUsers = new Map();
 
-interface OnlineUser {
-    userId: string;
-    isOnline: boolean;
-}
+export const onlineStatusSocket = async (socket) => {
 
-const onlineUsers = new Map<string, OnlineUser>();
-
-export const onlineStatusSocket = async (io: Server, socket: Socket) => {
-
-    socket.on("userOnline", (data: OnlineUser) => {
+    socket.on("userOnline", (data) => {
         onlineUsers.set(socket.id, data);
         socket.broadcast.emit("userOnline", Array.from(onlineUsers.values()));
     });

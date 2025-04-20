@@ -1,6 +1,4 @@
-import { Server, Socket } from "socket.io";
-
-export const typingIndicatorSocket = async (io: Server, socket: Socket) => {
+export const typingIndicatorSocket = async (socket) => {
     socket.on("typing", ({ fromUserId, toUserId }) => {
         socket.broadcast.emit("typing-status", { fromUserId, toUserId });
     });
