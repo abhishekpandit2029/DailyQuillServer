@@ -12,14 +12,14 @@ const PORT = process.env.PORT || 4000;
 
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: "https://dailyquill.vercel.app",
         methods: ["GET", "POST"],
         credentials: true,
     },
 });
 
 app.use(cors({
-    origin: "*",
+    origin: "https://dailyquill.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
 }));
