@@ -2,7 +2,6 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
-import { corsOptions } from "./utils/corsOptions";
 import { onlineStatusSocket } from "./sockets/onlineStatusSocket";
 import { typingIndicatorSocket } from "./sockets/typingIndicatorSocket";
 
