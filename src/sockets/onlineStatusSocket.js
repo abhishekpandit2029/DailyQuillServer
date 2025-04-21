@@ -1,14 +1,13 @@
 const onlineUsers = new Map();
 
-export const onlineStatusSocket = async (socket) => {
-
-    socket.on("userOnline", (data) => {
-        onlineUsers.set(socket.id, data);
-        socket.broadcast.emit("userOnline", Array.from(onlineUsers.values()));
+export const onlineStatusSocket = (socket) => {
+    socket.on("userOnline", (userData) => {
+        onlineUsers.set(userData?.userId, userData);
+        socket.emit("userOnline", Array.from(onlineUsers.values()));
     });
 
-    socket.on("disconnect", () => {
-        onlineUsers.delete(socket.id);
-        socket.broadcast.emit("userOnline", Array.from(onlineUsers.values()));
+    socket.on("disconnect", (userData) => {
+        onlineUsers.delete(userData?.userId);
+        socket.emit("userOnline", Array.from(onlineUsers.values()));
     });
 };

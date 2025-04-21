@@ -5,28 +5,27 @@ import cors from "cors";
 import { onlineStatusSocket } from "./sockets/onlineStatusSocket.js";
 import { typingIndicatorSocket } from "./sockets/typingIndicatorSocket.js";
 
-
 const app = express();
 const server = createServer(app);
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 const io = new Server(server, {
     cors: {
-        origin: "https://dailyquill.vercel.app",
+        origin: "*",
         methods: ["GET", "POST"],
         credentials: true,
     },
 });
 
 app.use(cors({
-    origin: "https://dailyquill.vercel.app",
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
 }));
 
-io.on("connection", async (socket) => {
-    await onlineStatusSocket(io, socket);
-    await typingIndicatorSocket(io, socket);
+io.on("connection", (socket) => {
+    onlineStatusSocket(socket);
+    typingIndicatorSocket(socket);
 });
 
 server.listen(PORT);
